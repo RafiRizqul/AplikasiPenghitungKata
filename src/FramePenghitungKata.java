@@ -13,7 +13,7 @@ import javax.swing.event.DocumentListener;
  */
 public class FramePenghitungKata extends javax.swing.JFrame {
 
-    // Fungsi untuk menghitung kata, karakter, kalimat, dan paragraf
+    // Fungsi untuk menghitung kata, karakter, kalimat, dan paragraf.
     private void hitungPenghitungan() {
         // Ambil teks dari jTextAreaInputan
         String teks = jTextAreaInputan.getText().trim();
