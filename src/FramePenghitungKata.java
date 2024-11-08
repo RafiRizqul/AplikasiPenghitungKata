@@ -13,6 +13,79 @@ import javax.swing.event.DocumentListener;
  */
 public class FramePenghitungKata extends javax.swing.JFrame {
 
+    private void simpanData() {
+        // Ambil teks dari jTextAreaInputan
+        String teks = jTextAreaInputan.getText().trim();
+
+        // Ambil hasil perhitungan
+        String jumlahKata = jLabelKata.getText();
+        String jumlahKarakter = jLabelKarakter.getText();
+        String jumlahKalimat = jLabelKalimat.getText();
+        String jumlahParagraf = jLabelParagraf.getText();
+
+        // Buat string untuk disimpan ke file
+        String data = "Teks yang dimasukkan:\n" + teks + "\n\n";
+        data += "Jumlah Kata: " + jumlahKata + "\n";
+        data += "Jumlah Karakter: " + jumlahKarakter + "\n";
+        data += "Jumlah Kalimat: " + jumlahKalimat + "\n";
+        data += "Jumlah Paragraf: " + jumlahParagraf + "\n";
+
+        // Gunakan JFileChooser untuk memilih lokasi dan nama file
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setDialogTitle("Pilih Lokasi untuk Menyimpan File");
+        fileChooser.setSelectedFile(new java.io.File("hasil_penghitungan.txt"));
+
+        // Menampilkan dialog simpan
+        int result = fileChooser.showSaveDialog(this);
+
+        if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
+            // Ambil file yang dipilih
+            java.io.File file = fileChooser.getSelectedFile();
+
+            // Menyimpan data ke file
+            try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(file))) {
+                writer.write(data);
+                javax.swing.JOptionPane.showMessageDialog(this, "Data berhasil disimpan ke " + file.getAbsolutePath());
+            } catch (java.io.IOException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage());
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Proses penyimpanan dibatalkan.");
+        }
+    }
+
+    private void cariKata() {
+        // Ambil kata yang dicari dari text field
+        String kataCari = jTextFieldCari.getText().trim();
+
+        if (kataCari.isEmpty()) {
+            // Jika kata kosong, tampilkan pesan atau lakukan hal lainnya
+            javax.swing.JOptionPane.showMessageDialog(this, "Masukkan kata yang ingin dicari!");
+            return;
+        }
+
+        // Ambil teks dari jTextAreaInputan
+        String teks = jTextAreaInputan.getText();
+
+        // Cari kata dan highlight jika ditemukan
+        int index = teks.indexOf(kataCari);
+
+        if (index != -1) {
+            try {
+                // Sorot kata yang ditemukan
+                javax.swing.text.DefaultHighlighter.DefaultHighlightPainter painter
+                        = new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(java.awt.Color.YELLOW);
+                javax.swing.text.Highlighter highlighter = jTextAreaInputan.getHighlighter();
+                highlighter.removeAllHighlights(); // Hapus highlight sebelumnya
+                highlighter.addHighlight(index, index + kataCari.length(), painter); // Tambah highlight untuk kata yang ditemukan
+            } catch (javax.swing.text.BadLocationException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Kata tidak ditemukan!");
+        }
+    }
+
     // Fungsi untuk menghitung kata, karakter, kalimat, dan paragraf.
     private void hitungPenghitungan() {
         // Ambil teks dari jTextAreaInputan
@@ -129,6 +202,11 @@ public class FramePenghitungKata extends javax.swing.JFrame {
         jPanel1.add(jButtonSimpan, gridBagConstraints);
 
         jButtonCari.setText("Cari");
+        jButtonCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCariActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -231,8 +309,12 @@ public class FramePenghitungKata extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonHitungActionPerformed
 
     private void jButtonSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimpanActionPerformed
-        // TODO add your handling code here:
+        simpanData();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSimpanActionPerformed
+
+    private void jButtonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCariActionPerformed
+        cariKata();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCariActionPerformed
 
     /**
      * @param args the command line arguments
