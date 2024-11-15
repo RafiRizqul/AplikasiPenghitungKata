@@ -48,10 +48,6 @@ Aplikasi Java ini memungkinkan pengguna untuk memasukkan teks ke dalam area teks
 3. **Cari**: Masukkan kata yang ingin dicari di kolom "Cari" dan klik tombol "Cari" untuk mencari dan menyorot kata tersebut dalam teks.
 4. **Simpan Hasil**: Setelah melakukan perhitungan, klik tombol "Simpan" untuk menyimpan teks input beserta hasil perhitungan ke dalam file.
 
-## Screenshot
-
-![Screenshot aplikasi](screenshot.png)  *(Gantilah dengan gambar screenshot aplikasi yang sebenarnya)*
-
 ## Penjelasan Fungsionalitas
 
 - **Document Listener**: `DocumentListener` memantau perubahan pada area teks dan secara otomatis memperbarui jumlah kata, karakter, kalimat, dan paragraf.
@@ -62,3 +58,18 @@ Aplikasi Java ini memungkinkan pengguna untuk memasukkan teks ke dalam area teks
 
 1. Masukkan teks berikut:
 
+
+2. Klik **Hitung** untuk menghitung jumlah kata, karakter, kalimat, dan paragraf.
+
+3. Klik **Simpan** untuk menyimpan hasil perhitungan ke dalam file.
+
+4. Gunakan **Cari** untuk mencari dan menyorot kata tertentu dalam teks.
+
+## Teknologi yang Digunakan
+
+- **Java Swing** untuk membangun antarmuka pengguna grafis (GUI).
+- **Java I/O** untuk operasi file (menyimpan hasil).
+
+## Lisensi
+
+Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) untuk rincian.
